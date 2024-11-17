@@ -1,25 +1,31 @@
 
-const mediaFiles = [
-    "Media/Ain't No Johnny Cash.m4a",
-    "Media/Catching Coconuts.m4a",
-    "Media/Ypu Can Take Me.m4a"
+const audioFiles = [
+    "Ain't No Johnny Cash.m4a",
+    "Catching Coconuts.m4a",
+    "Ypu Can Take Me.m4a",
+	"Mr Cowhand.m4a"
 ];
 
-const mediaList = document.getElementById('mediaFiles');
+var mediaList = document.getElementById('mediaFiles');
 
-mediaFiles.forEach(file => {
-    const listItem = document.createElement('li');
-
+audioFiles.forEach(file => {
+    var listItem = document.createElement('div');
+    
+    
     const audio = document.createElement('audio');
-    audio.controls = true;
-    audio.src = file;
+    audio.setAttribute('controls','controls');
+    audio.setAttribute('src',file);
+    audio.setAttribute('label', file);
 
     const downloadLink = document.createElement('a');
-    downloadLink.href = file;
-    downloadLink.download = file.split('/').pop();
-    downloadLink.textContent = 'Download';
+    downloadLink.setAttribute('href',file);
+    downloadLink.setAttribute("Text", file)
+    downloadLink.innerText = file;
 
-    listItem.appendChild(audio);
-    listItem.appendChild(downloadLink);
-    mediaList.appendChild(listItem);
+   // listItem<HTMLAudioElement>appendChild(audio);
+  //  listItem<HTMLAnchorElement>appendChild(downloadLink);
+   
+  //  var n = listItem.audio.createElement("file");
+    mediaList.appendChild(audio);
+	mediaList.appendChild(downloadLink);
 });
