@@ -1,24 +1,25 @@
 
-fetch('mediaFiles.json')
-.then(response => response.json())
-.then(files => {
-    const mediaList = document.getElementById('mediaFiles');
-    files.forEach(file => {
-        const listItem = document.createElement('li');
+const mediaFiles = [
+    "Media/Ain't No Johnny Cash.m4a",
+    "Media/Catching Coconuts.m4a",
+    "Media/Ypu Can Take Me.m4a"
+];
 
-        const audio = document.createElement('audio');
-        audio.controls = true;
-        audio.src = file;
+const mediaList = document.getElementById('mediaFiles');
 
-        const downloadLink = document.createElement('a');
-        downloadLink.href = file;
-        downloadLink.download = file.split('/').pop();
-        downloadLink.textContent = 'Download';
+mediaFiles.forEach(file => {
+    const listItem = document.createElement('li');
 
-        listItem.appendChild(audio);
-        listItem.appendChild(downloadLink);
-        mediaList.appendChild(listItem);
-    });
-})
-.catch(error => console.error('Error fetching media files:', error));
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = file;
 
+    const downloadLink = document.createElement('a');
+    downloadLink.href = file;
+    downloadLink.download = file.split('/').pop();
+    downloadLink.textContent = 'Download';
+
+    listItem.appendChild(audio);
+    listItem.appendChild(downloadLink);
+    mediaList.appendChild(listItem);
+});
