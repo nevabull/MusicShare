@@ -1,25 +1,55 @@
-<!doctype.html>
+<!DOCTYPE.html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Media Opensourced</title>
+    <title>Media OpenSourced</title>
     <!-- Bootstrap -->
    <link href="bootstrap.min.css" rel="stylesheet">
 <title>Make your Own Page</title>
 	
 	<script>			
-	async function WriteToFile(){
-		const handle = await window.showSaveFilePicker({ suggestedName: 'index.html.txt', types: [{ description: 'HTML Files', accept: {'text/plain': ['.html']}, }], }); 
-		
-		const writableStream = await handle.createWritable(); // Write data to the file 
-		let htmlstring = document.getElementById("Rendered").innerHTML;
-		
-		await writableStream.write(htmlstring); // Close the file and write the contents to disk 	
-		await writableStream.close();
-		
+	async function fetchHTML(url) {
+    try {
+        const response = await fetch(url).then(response => { if (!response.ok) { throw new Error('Network response was not ok'); } return response.text(); })
+		}
+	catch {
+		Alert("Shit Happened");
 	}	
+		}
+	
+
+
+
+	
+	function downloadFile() {
+    // Create a Blob with the content you want to download
+    let content = fetchHTML('head.html');
+		  
+	content += document.getElementById("Rendered").innerHTML;
+    const blob = new Blob([content], { type: 'text/html' });
+
+    // Create a link element
+    const link = document.createElement('a');
+
+    // Set the download attribute with a filename
+    link.download = 'index.html';
+
+    // Create a URL for the Blob and set it as the href attribute
+    link.href = window.URL.createObjectURL(blob);
+
+    // Append the link to the document body
+    document.body.appendChild(link);
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
+}
+
+
 		
 	function titleChangeHandler(event){
 		
@@ -73,28 +103,7 @@ function dropHandler(event) {
    
 	
 }
-		/*
-		function renderContent(file file){
-		
-	  const audioListElement = document.getElementById('audioList');
-       
-   
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-
-        const audioElement = document.createElement('audio');
-        audioElement.controls = true;
-        audioElement.src = file.name;
-
-        const titleElement = document.createElement('p');
-        titleElement.textContent = file.name;
-
-        listItem.appendChild(titleElement);
-        listItem.appendChild(audioElement);
-        audioListElement.appendChild(listItem);
-   
-			
-		}*/
+	
 
 	</script>
 </head>
@@ -136,15 +145,11 @@ function dropHandler(event) {
 		
 		<form>
 			<fieldset>
-			
-			<!--div class="row"-->
-				
-				
-				<div class="col-12">
+					<div class="col-12">
 					<label for="PageTitle" class="col-12 col-form-label-lg">Title</label>
 					<input type="text" class="form-control" id="PageTitle" value="The Music I'm Sharing" onChange="titleChangeHandler(event);">	
-					<label for="Licence" class="col-12 col-form-label-lg">Under This License</label>
-					<select name="licence" id = "license">						
+					<label for="licence" class="col-12 col-form-label-lg">Under This License</label>
+					<select name="licence" id = "licence">						
 						<option value="CC">Creative Commons (CC)</option>
 						<option value="License.txt">My License found in License.txt</option>
 						<option value="Artistic-2.0">Artistic license 2.0</option>
@@ -164,7 +169,7 @@ function dropHandler(event) {
 			
 				</div>
 
-		<input type=submit class="btn-primary" onclick="WriteToFile()" value="Make HTML File"/>
+		<input type=submit class="btn-primary" onclick="downloadFile()" value="Download html file"/>
 		</fieldset>
 		</form>
 		
