@@ -1,0 +1,102 @@
+<!doctype.html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Media Opensourced</title>
+    <!-- Bootstrap -->
+   <link href="bootstrap.min.css" rel="stylesheet">
+<title>Make your Own Page</title>
+	
+	<script>
+		
+		var filenames = { };
+	
+	function dragOverHandler(event) {
+    event.preventDefault(); // Prevent default behavior (Prevent file from being opened)
+}
+
+function dropHandler(event) {
+    event.preventDefault(); // Prevent default behavior (Prevent file from being opened)
+    
+    if (event.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        for (let i = 0; i < event.dataTransfer.items.length; i++) {
+            if (event.dataTransfer.items[i].kind === 'file') {
+                let file = event.dataTransfer.items[i].getAsFile();
+				
+                document.getElementById('file_name').innerHTML += `<p>${file.name}</p>`;
+				filenames += file.name;
+            }
+        }
+    } else {
+        // Use DataTransfer interface to access the file(s)
+        for (let i = 0; i < event.dataTransfer.files.length; i++) {
+			
+            document.getElementById('file_name').innerHTML += `<p>${event.dataTransfer.files[i].name}<//p>`;
+			filenames += file.name;
+        }
+    }
+}
+
+	</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+  <div class="container-fluid align-content-center">
+    <a class="navbar-brand" href="#">Media Sharing</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Roy Example
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Make.html">Make You Own</a>
+        </li>
+	</ul>
+	  </div>
+	</div>
+</nav>	
+	<div class="container-fluid d-flex flex-column align-content-center justify-items-center">                      
+  <div class="Display-1"><h1>Make a Webpage for Share Files</h1></div>
+  <br/>   
+		
+        <h3>Step 1.  Figure out how to license your content.</h3>
+		<ul>
+		<li>
+		Read the terms of service for where you intend to host the media.  Githubs are here: <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">Githubs Terms of Service</a>
+		</li>
+		<li>
+		   Decide on a License (There are many). For a Guide relevant to GitHub Look at the <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository"> Docs on Licensing</a> and Legal hullabaloo
+		</li>	
+		</ul>
+			
+		 <h3>Step 2. Make Your Web Page With This Form</h3>
+		
+		<form>
+			<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+ <p>Drag one or more files to this drop zone.</p>
+				<img height="200" width="200"/>	
+</div>
+<p id="file_name">	
+			
+				</p>
+
+		
+		
+		</form>
+		
+		<h3>Step 3. Upload it to a cheap or free Static Page Host</h3>
+ 
+ 
+</div>	
+
+</body>
+</html>
+
