@@ -9,10 +9,23 @@
    <link href="bootstrap.min.css" rel="stylesheet">
 <title>Make your Own Page</title>
 	
-	<script>
+	<script>			
+	async function WriteToFile(){
+		const handle = await window.showSaveFilePicker({ suggestedName: 'index.html.txt', types: [{ description: 'HTML Files', accept: {'text/plain': ['.html']}, }], }); 
 		
-		var filenames = { };
-	
+		const writableStream = await handle.createWritable(); // Write data to the file 
+		let htmlstring = document.getElementById("Rendered").innerHTML;
+		
+		await writableStream.write(htmlstring); // Close the file and write the contents to disk 	
+		await writableStream.close();
+		
+	}	
+		
+	function titleChangeHandler(event){
+		
+		document.getElementById('PageName').innerHTML = document.getElementById('PageTitle').value	
+	}	
+		
 	function dragOverHandler(event) {
     event.preventDefault(); // Prevent default behavior (Prevent file from being opened)
 }
@@ -27,7 +40,8 @@ function dropHandler(event) {
                 let file = event.dataTransfer.items[i].getAsFile();
 				
                 document.getElementById('file_name').innerHTML += `<p>${file.name}</p>`;
-				filenames += file.name;
+				audioList += file.name;
+				f = file.name; 
             }
         }
     } else {
@@ -35,10 +49,52 @@ function dropHandler(event) {
         for (let i = 0; i < event.dataTransfer.files.length; i++) {
 			
             document.getElementById('file_name').innerHTML += `<p>${event.dataTransfer.files[i].name}<//p>`;
-			filenames += file.name;
+			audioList += event.dataTransfer.files[i].name;
+			f = event.dataTransfer.files[i].name;
         }
     }
+	
+	const audioListElement = document.getElementById('audioList');
+       
+   
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+
+        const audioElement = document.createElement('audio');
+        audioElement.controls = true;
+        audioElement.src = f;
+
+        const titleElement = document.createElement('p');
+        titleElement.textContent = f;
+
+        listItem.appendChild(titleElement);
+        listItem.appendChild(audioElement);
+        audioListElement.appendChild(listItem);
+   
+	
 }
+		/*
+		function renderContent(file file){
+		
+	  const audioListElement = document.getElementById('audioList');
+       
+   
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+
+        const audioElement = document.createElement('audio');
+        audioElement.controls = true;
+        audioElement.src = file.name;
+
+        const titleElement = document.createElement('p');
+        titleElement.textContent = file.name;
+
+        listItem.appendChild(titleElement);
+        listItem.appendChild(audioElement);
+        audioListElement.appendChild(listItem);
+   
+			
+		}*/
 
 	</script>
 </head>
@@ -52,18 +108,17 @@ function dropHandler(event) {
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Roy Example
-            <span class="visually-hidden">(current)</span>
-          </a>
+          <a class="nav-link" href="index.html">Roy Example</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Make.html">Make You Own</a>
+          <a class="nav-link active" href="Make.html">Make You Own</a> 
+			<span class="visually-hidden">(current)</span>
         </li>
 	</ul>
 	  </div>
 	</div>
-</nav>	
-	<div class="container-fluid d-flex flex-column align-content-center justify-items-center">                      
+</nav>
+	<div class="container-fluid d-flex flex-column justify-content-center align-items-center">                      
   <div class="Display-1"><h1>Make a Webpage for Share Files</h1></div>
   <br/>   
 		
@@ -80,17 +135,48 @@ function dropHandler(event) {
 		 <h3>Step 2. Make Your Web Page With This Form</h3>
 		
 		<form>
+			<fieldset>
+			
+			<!--div class="row"-->
+				
+				
+				<div class="col-12">
+					<label for="PageTitle" class="col-12 col-form-label-lg">Title</label>
+					<input type="text" class="form-control" id="PageTitle" value="The Music I'm Sharing" onChange="titleChangeHandler(event);">	
+					<label for="Licence" class="col-12 col-form-label-lg">Under This License</label>
+					<select name="licence" id = "license">						
+						<option value="CC">Creative Commons (CC)</option>
+						<option value="License.txt">My License found in License.txt</option>
+						<option value="Artistic-2.0">Artistic license 2.0</option>
+					</select>
+				</div>
+			<!--/div-->
+				<p></p>
 			<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
- <p>Drag one or more files to this drop zone.</p>
+ <p>Drag Media files to this drop zone one at a time, in the order you want them to Display</p>
+				
 				<img height="200" width="200"/>	
 </div>
-<p id="file_name">	
+				<div>
+				<p id="file_name">	
 			
 				</p>
+			
+				</div>
 
-		
-		
+		<input type=submit class="btn-primary" onclick="WriteToFile()" value="Make HTML File"/>
+		</fieldset>
 		</form>
+		
+		<div id="Rendered">
+		 <div class="Display-1"><h1 id="PageName"></h1></div>
+  <br/>   
+    <div class="audio-list">
+     <ul id="audioList" class="list-group"></ul>        
+    </div>
+  <br/>
+		
+		</div>
 		
 		<h3>Step 3. Upload it to a cheap or free Static Page Host</h3>
  
