@@ -15,37 +15,38 @@
         const response = await fetch(url).then(response => { if (!response.ok) { throw new Error('Network response was not ok'); } return response.text(); })
 		}
 	catch {
-		Alert("Shit Happened");
+		alert("Shit Happened");
 	}	
 		}
 	
 
-
+  function downloadCSS()
+		{
+	const link = document.createElement('a');
+	link.download = 'bootstrap.min.css';   
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+		}
 
 	
 	function downloadFile() {
     // Create a Blob with the content you want to download
-    let content = fetchHTML('head.html');
-		  
-	content += document.getElementById("Rendered").innerHTML;
-    const blob = new Blob([content], { type: 'text/html' });
-
-    // Create a link element
-    const link = document.createElement('a');
-
-    // Set the download attribute with a filename
-    link.download = 'index.html';
-
-    // Create a URL for the Blob and set it as the href attribute
-    link.href = window.URL.createObjectURL(blob);
-
-    // Append the link to the document body
+    //let content = fetchHTML('head.html');
+	const content ='<!DOCTYPE.html>' +
+	'<html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+		  '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+		  '<title>Media OpenSourced</title><link href="bootstrap.min.css" rel="stylesheet">' +
+		  '</head><body><div class="container-fluid d-flex flex-column justify-content-center align-items-center">'
+	+ document.getElementById("Rendered").innerHTML + '</body></html>';	
+ 
+	const blob = new Blob([content], { type: 'text/html' });
+	
+	const link = document.createElement('a');
+	link.download = 'index.html';
+    link.href = window.URL.createObjectURL(blob);   
     document.body.appendChild(link);
-
-    // Programmatically click the link to trigger the download
     link.click();
-
-    // Remove the link from the document
     document.body.removeChild(link);
 }
 
@@ -121,32 +122,32 @@ function dropHandler(event) {
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="make.html">Make You Own
-			<span class="visually-hidden">(current)</span>
-			</a> 
+		  <span class="visually-hidden">(current)</span>
+		  </a> 
         </li>
 	</ul>
 	  </div>
 	</div>
 </nav>
-	<div class="container-fluid d-flex flex-column justify-content-center align-items-center">                      
+
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center"> 
+	<br>
   <div class="Display-1"><h1>Make a Webpage for Share Files</h1></div>
-  <br/>   
-		
-        <h3>Step 1.  Figure out how to license your content.</h3>
-		<ul>
+<br>
+	<ol>
+		<li>
+	<h4> Figure out how to license your content.</h4></li>
+  <ul>
 		<li>
 		Read the terms of service for where you intend to host the media.  Githubs are here: <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">Githubs Terms of Service</a>
-		</li>
+	</li>
 		<li>
 		   Decide on a License (There are many). For a Guide relevant to GitHub Look at the <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository"> Docs on Licensing</a> and Legal hullabaloo
 		</li>	
-		</ul>
-			
-		 <h3>Step 2. Make Your Web Page With This Form</h3>
-		
-		<form>
-			<fieldset>
-					<div class="col-12">
+	</ul>
+<form>
+	  <fieldset>				
+		<li><h4>Make Your Web Page With This Form</h4></li>
 					<label for="PageTitle" class="col-12 col-form-label-lg">Title</label>
 					<input type="text" class="form-control" id="PageTitle" value="The Music I'm Sharing" onChange="titleChangeHandler(event);">	
 					<label for="licence" class="col-12 col-form-label-lg">Under This License</label>
@@ -155,24 +156,24 @@ function dropHandler(event) {
 						<option value="License.txt">My License found in License.txt</option>
 						<option value="Artistic-2.0">Artistic license 2.0</option>
 					</select>
-				</div>
+				
 			<!--/div-->
 				<p></p>
 			<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
  <p>Drag Media files to this drop zone one at a time, in the order you want them to Display</p>
 				
-				<img height="200" width="200"/>	
+				<img height="200" width="250"/>	
 </div>
 				<div>
-				<p id="file_name">	
-			
-				</p>
-			
+				<p id="file_name"></p>			
 				</div>
 
-		<input type=submit class="btn-primary" onclick="downloadFile()" value="Download html file"/>
-		</fieldset>
-		</form>
+		<p><input type="button" class="btn-primary" onclick="downloadFile()" value="Download html file"/>
+		</p>
+		  <p><input type="button" class="btn-primary" onclick="downloadCSS()" value="Download this Theme (CSS)"/></p>
+
+	</fieldset>
+  </form>
 		
 		<div id="Rendered">
 		 <div class="Display-1"><h1 id="PageName"></h1></div>
@@ -184,8 +185,8 @@ function dropHandler(event) {
 		
 		</div>
 		
-		<h3>Step 3. Upload it to a cheap or free Static Page Host</h3>
- 
+		<li><h3>Upload all files to a Static Page Host</h3></li>
+ </ol>
  
 </div>	
 
