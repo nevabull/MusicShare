@@ -1,12 +1,13 @@
 <!DOCTYPE.html>
-<html>
+<html data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media OpenSourced</title>
     <!-- Bootstrap -->
-   <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <title>Make your Own Page</title>
 	
 	<script>			
@@ -109,7 +110,7 @@ function dropHandler(event) {
 	</script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid align-content-center">
     <a class="navbar-brand" href="#">Media OpenSourced</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,12 +132,11 @@ function dropHandler(event) {
 </nav>
 
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center"> 
-	<br>
-  <div class="Display-1"><h1>Make a Webpage for Share Files</h1></div>
-<br>
-	<ol>
-		<li>
-	<h4> Figure out how to license your content.</h4></li>
+	
+  <div class="Display-1"><h1>Make a Webpage for Sharing Audio Files</h1></div>
+
+<form>	
+	<h4>Step 1. Figure out how to license your content.</h4>
   <ul>
 		<li>
 		Read the terms of service for where you intend to host the media.  Githubs are here: <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">Githubs Terms of Service</a>
@@ -145,7 +145,7 @@ function dropHandler(event) {
 		   Decide on a License (There are many). For a Guide relevant to GitHub Look at the <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository"> Docs on Licensing</a> and Legal hullabaloo
 		</li>	
 	</ul>
-<form>
+
 	  <fieldset>				
 		<li><h4>Make Your Web Page With This Form</h4></li>
 					<label for="PageTitle" class="col-12 col-form-label-lg">Title</label>
@@ -162,7 +162,7 @@ function dropHandler(event) {
 			<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
  <p>Drag Media files to this drop zone one at a time, in the order you want them to Display</p>
 				
-				<img height="200" width="250"/>	
+				<img height="200" width="300"/>	
 </div>
 				<div>
 				<p id="file_name"></p>			
@@ -170,10 +170,10 @@ function dropHandler(event) {
 
 		<p><input type="button" class="btn-primary" onclick="downloadFile()" value="Download html file"/>
 		</p>
-		  <p><input type="button" class="btn-primary" onclick="downloadCSS()" value="Download this Theme (CSS)"/></p>
-
+	<p><h3>Pick a theme from <a href="https://bootswatch.com/">Bootswatch.com</a> - just download the boootstrap.min.css file..</h3></p>
+<h3>Upload all media/html/css files to a Static Page Host</h3>
 	</fieldset>
-  </form>
+
 		
 		<div id="Rendered">
 		 <div class="Display-1"><h1 id="PageName"></h1></div>
@@ -185,9 +185,9 @@ function dropHandler(event) {
 		
 		</div>
 		
-		<li><h3>Upload all files to a Static Page Host</h3></li>
- </ol>
+	
  
+	</form>
 </div>	
 
 </body>
