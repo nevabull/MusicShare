@@ -1,5 +1,5 @@
 <!DOCTYPE.html>
-<html data-bs-theme="dark">
+<html data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,8 +19,35 @@
 		alert("Shit Happened");
 	}	
 		}
-	
+  async function getFilenames() { 
+	  
+	 
+		      	 	  
+	  			const audioListElement = document.getElementById('audioList');
+	            const input = document.getElementById('fileInput')
+			
+				const files = input.files; 
+				const filenames = Array.from(files).map(files => files.name); 
+	  await filenames.forEach(filename => { 
+	  const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
 
+        const audioElement = document.createElement('audio');
+        audioElement.controls = true;
+        audioElement.src = filename;
+
+        const titleElement = document.createElement('p');
+        titleElement.textContent = filename;
+
+        listItem.appendChild(titleElement);
+        listItem.appendChild(audioElement);
+        audioListElement.appendChild(listItem); 
+						   })	
+						}
+
+		
+		
+		
   function downloadCSS()
 		{
 	const link = document.createElement('a');
@@ -110,7 +137,7 @@ function dropHandler(event) {
 	</script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="light">
   <div class="container-fluid align-content-center">
     <a class="navbar-brand" href="#">Media OpenSourced</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,7 +185,8 @@ function dropHandler(event) {
 					</select>
 				
 			<!--/div-->
-				<p></p>
+		  <p><input type="file" id="fileInput" multiple onChange="getFilenames()"></p>
+		  <p><!--button onclick="getFilenames()">Get Filenames</button--> </p>
 			<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
  <p>Drag Media files to this drop zone one at a time, in the order you want them to Display</p>
 				
